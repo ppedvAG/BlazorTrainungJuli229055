@@ -1,6 +1,10 @@
 ﻿@page "/component"
-<h3>UseComponent1</h3>
+@page "/hannes/{id:int}"
+<h3>UseComponent1 @MyProperty</h3>
 <Component MyProperty="42"></Component>
 @code {
-
+    [Parameter]
+public int id { get; set; }
+[SupplyParameterFromQuery(Name ="sepp")]
+public string MyProperty { get; set; }
 }
