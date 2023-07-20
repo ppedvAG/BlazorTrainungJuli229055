@@ -1,0 +1,37 @@
+﻿@page "/pwd"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedLocalStorage protectedLocalStorage
+<h3>Passwort</h3>
+<div class="row">
+    <div class="col">
+        <label class="col-form-label">Passwort:</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="passwort" @bind="strPasswort">
+            <button class="btn btn-outline-secondary" type="button" @onclick="Save">Save</button>
+        </div>
+    </div>
+</div>
+@code {
+    string strPasswort;
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var res = await protectedLocalStorage.GetAsync<string>("hannes");
+            if (res.Success)
+            {
+                strPasswort = res.Value;
+                StateHasChanged();
+            }
+        }
+    }
+    void Save()
+    {
+        protectedLocalStorage.SetAsync("hannes", strPasswort);
+
+    }
+}
