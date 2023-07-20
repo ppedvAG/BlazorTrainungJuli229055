@@ -1,0 +1,24 @@
+﻿@page "/attribute"
+<h3>Attr</h3>
+<div class="@variable">
+    <button @onclick="click" class="@variable">click</button>
+    <input @onkeydown="keydown" @bind-value="variable" @bind-value:event="oninput"/>
+    <input @ref="hannes"/><br />
+    <input @ref="hannes" />
+</div>
+@code {
+    string variable;
+    ElementReference hannes;
+
+    void click()
+    {
+
+    }
+    void keydown(KeyboardEventArgs args)
+    {
+        if (args.Key=="A")
+        {
+            hannes.FocusAsync();
+        }
+    }
+}
