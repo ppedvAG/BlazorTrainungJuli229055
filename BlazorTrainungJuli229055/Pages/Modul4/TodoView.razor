@@ -1,5 +1,50 @@
-﻿<h3>TodoView</h3>
+﻿@page "/todo"
+@inject IHttpClientFactory http
+<h3>TodoView</h3>
+<div class="container">
+    <div class="row">
+        <div class="col">
 
+            <label class="col-form-label">Filter:</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="suche" @bind="eingabe" @bind:event="oninput">
+                <button class="btn btn-outline-secondary" type="button">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                @if (Liste==null)
+                {
+                    <li class="list-group-item alert-danger">
+                       keine Daten
+                    </li>
+                }
+                else
+                {
+                    @foreach (var item in Liste.Where(x=>x.title.Contains(eingabe)))
+                    {
+                        <li class="list-group-item">
+                            @item.title
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+
+</div>
 @code {
+    string eingabe="";
+    List<ToDoItem> Liste;
+    protected override async Task OnInitializedAsync()
+    {
+        using (var client=http.CreateClient())
+        {
+          Liste= await  client.GetFromJsonAsync<List<ToDoItem>>("https://jsonplaceholder.typicode.com/todos");
+        }
+    }
 
 }
