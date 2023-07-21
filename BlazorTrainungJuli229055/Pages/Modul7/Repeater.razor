@@ -1,0 +1,30 @@
+﻿@typeparam ItemType
+@if (Items?.Any() ?? false)
+{
+    @foreach (var item in Items)
+    {
+        @ItemTemplate(item)
+    }
+}
+
+else
+{
+    @EmptyItemTemplate
+}
+@code {
+    [Parameter]
+    public RenderFragment<ItemType> ItemTemplate { get; set; }
+    [Parameter]
+    public RenderFragment EmptyItemTemplate { get; set; }
+
+    [Parameter]
+    public Func<List<ItemType>> SelectMethod { get; set; }
+
+
+    List<ItemType> Items;
+
+    protected override void OnInitialized()
+    {
+        Items = SelectMethod?.Invoke();
+    }
+}
