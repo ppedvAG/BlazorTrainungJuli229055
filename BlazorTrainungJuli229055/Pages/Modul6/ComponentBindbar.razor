@@ -1,5 +1,9 @@
 ﻿<h3>ComponentBindbar</h3>
-
+<input @bind="Anzahl">
+</input>
 @code {
-
+    [Parameter]
+    public int Anzahl { get; set; }
+    [Parameter]
+    public EventCallback<int> AnzahlChanged { get; set; }
 }
