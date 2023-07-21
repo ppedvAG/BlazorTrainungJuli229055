@@ -1,7 +1,10 @@
 ﻿@page "/js"
+@using RazorClassLibrary1
 @inject IJSRuntime JSRuntime
 <h3>@Titel</h3>
 <button @onclick="delete">löschen</button>
+
+<button @onclick="prompt">Prompit</button>
 @code {
     string Titel = "JS Component";
     async Task delete()
@@ -12,5 +15,12 @@
 
             Titel = "gelöscht";
         }
+    }
+    async Task prompt()
+    {
+
+        var minibrowser = new ExampleJsInterop(JSRuntime);
+       Titel= await minibrowser.Prompt("Gibs mir");
+
     }
 }
