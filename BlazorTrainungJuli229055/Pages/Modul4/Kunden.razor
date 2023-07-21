@@ -1,0 +1,39 @@
+﻿@page "/kunden"
+@using BlazorTrainungJuli229055.Models
+@inject NorthwindContext db
+
+<h3>Kunden</h3>
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <label class="col-form-label">Filter:</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="suche" @bind="eingabe" @bind:event="oninput">
+                <button class="btn btn-outline-secondary" type="button">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                
+                    @foreach (var item in db.Customers.Where(x => x.CompanyName.Contains(eingabe)))
+                    {
+                        <li class="list-group-item">
+                            @item.CompanyName
+                        </li>
+                    }
+          
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+
+@code {
+    List<Customer> Liste;
+    string eingabe;
+
+}

@@ -1,0 +1,27 @@
+﻿Nuget
+
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.Design
+
+Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True
+
+appsettings
+{
+  "ConnectionStrings": { "Northwind": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True" }, 
+
+  Packet Manager COnsole
+
+
+  scaffold-dbcontext "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+  program.cs
+  builder.Services.AddDbContext<NorthwindContext>(
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Northwind")));
+
+usings
+using BlazorTrainungJuli229055.Models;
+using Microsoft.EntityFrameworkCore;
+
+
+
