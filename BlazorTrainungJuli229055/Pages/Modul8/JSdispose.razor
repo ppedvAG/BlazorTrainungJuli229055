@@ -1,0 +1,12 @@
+﻿@page "/js1"
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+
+<h3>JSdispose</h3>
+
+@code {
+    public void Dispose()
+    {
+        JSRuntime.InvokeVoidAsync("console.log", "Tut?");
+    }
+}
