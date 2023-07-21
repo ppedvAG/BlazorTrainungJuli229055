@@ -1,0 +1,30 @@
+﻿
+<h3 @attributes="@MyAttribue">@Head</h3>
+<p>@Body</p>
+@*@ChildContent 
+*@
+@Alter
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public int MyProperty { get; set; }
+    [CascadingParameter]
+    public int Alter { get; set; }
+    [CascadingParameter]
+    public string Franz { get; set; }
+
+    [Parameter(CaptureUnmatchedValues =true)]
+    public Dictionary<string,object> MyAttribue { get; set; }
+
+    //[Parameter]
+    //public RenderFragment ChildContent { get; set; }
+
+
+    [Parameter]
+    public RenderFragment Head { get; set; }
+
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+}
