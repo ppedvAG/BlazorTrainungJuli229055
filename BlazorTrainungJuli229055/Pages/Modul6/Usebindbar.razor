@@ -1,8 +1,12 @@
 ﻿<h3>Usebindbar</h3>
 <ComponentBindbar @bind-Anzahl="Count"></ComponentBindbar>
 
-<ComponentBindbar Anzahl="Count"></ComponentBindbar>
+<ComponentBindbar Anzahl="@Count" @ref="cb"></ComponentBindbar>
 @code {
     int Count;
-
+    ComponentBindbar cb;
+    protected override void OnInitialized()
+    {
+        cb.Anzahl = 42;
+    }
 }
