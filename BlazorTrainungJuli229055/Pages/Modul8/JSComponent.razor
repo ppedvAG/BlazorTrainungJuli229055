@@ -1,0 +1,16 @@
+﻿@page "/js"
+@inject IJSRuntime JSRuntime
+<h3>@Titel</h3>
+<button @onclick="delete">löschen</button>
+@code {
+    string Titel = "JS Component";
+    async Task delete()
+    {
+
+        if (await JSRuntime.InvokeAsync<bool>("confirm","wirklich löschen?"))
+        {
+
+            Titel = "gelöscht";
+        }
+    }
+}
